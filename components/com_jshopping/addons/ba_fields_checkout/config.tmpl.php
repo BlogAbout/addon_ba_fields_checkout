@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.0
+ * @version 0.1.1
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -14,6 +14,15 @@ $params = (object)$this->params;
 $yes_no_options = array();
 $yes_no_options[] = \JHtml::_('select.option', '1', \JText::_('JYES'));
 $yes_no_options[] = \JHtml::_('select.option', '0', \JText::_('JNO'));
+
+$field_type = array(
+    0 => _JSHOP_BACF_FIELD_TYPE,
+    'input' => _JSHOP_BACF_FIELD_TYPE_INPUT,
+    'area' => _JSHOP_BACF_FIELD_TYPE_AREA,
+    'radio' => _JSHOP_BACF_FIELD_TYPE_RADIO,
+    'checkbox' => _JSHOP_BACF_FIELD_TYPE_CHECKBOX,
+    'select' => _JSHOP_BACF_FIELD_TYPE_SELECT
+);
 
 $db = \JFactory::getDbo();
 $query = "
@@ -32,9 +41,12 @@ $standart_fields = '
 				<a class="remove btn button btn-danger" aria-label="' . _JSHOP_BAFO_FIELD_REMOVE . '"><span class="icon-minus" aria-hidden="true"></span></a>
 			</div>
 		</td>
-		<td><input type="text" name="dinamic_field[title][]" value="" placeholder="' . _JSHOP_BAFO_TITLE . '" title="' . _JSHOP_BAFO_TITLE_DESC . '" class="inputbox form-control form-input" style="width: 210px;" /></td>
-		<td><input type="number" min="0" step="1" name="dinamic_field[ordering][]" value="" placeholder="' . _JSHOP_BAFO_ORDER . '" title="' . _JSHOP_BAFO_ORDER_DESC . '" class="inputbox form-control form-input" style="width: 100px;" /></td>
-	</tr>
+		<td>' . \JHtml::_('select.genericlist', $field_type, 'dinamic_field[field_type][]', 'class = "inputbox form-control form-select"', 'value', 'text', 0) . '</td>
+        <td><input type="text" name="dinamic_field[title][]" value="" placeholder="' . _JSHOP_BAFO_TITLE . '" title="' . _JSHOP_BAFO_TITLE_DESC . '" class="inputbox form-control form-input" style="width: 210px;" /></td>
+	    <td><textarea name="dinamic_field[values_list][]" placeholder="' . _JSHOP_BAFO_VALUES . '" title="' . _JSHOP_BAFO_VALUES_DESC . '" class="inputbox form-control form-textarea"></textarea></td>
+		<td>' . \JHtml::_('select.genericlist', $yes_no_options, 'dinamic_field[required[][]', 'class="inputbox form-control form-select form-select-color-state" style="width: 120px;"', 'value', 'text', 0) . '</td>
+        <td><input type="number" min="0" step="1" name="dinamic_field[ordering][]" value="" placeholder="' . _JSHOP_BAFO_ORDER . '" title="' . _JSHOP_BAFO_ORDER_DESC . '" class="inputbox form-control form-input" style="width: 100px;" /></td>
+    </tr>
 ';
 
 $style = "
@@ -84,7 +96,10 @@ $script = "
     <table class="admintable ba_list_fields">
         <thead>
         <th></th>
+        <th title="<?php echo _JSHOP_BAFO_TYPE_DESC; ?>"><?php echo _JSHOP_BAFO_TYPE; ?></th>
         <th title="<?php echo _JSHOP_BAFO_TITLE_DESC; ?>"><?php echo _JSHOP_BAFO_TITLE; ?></th>
+        <th title="<?php echo _JSHOP_BAFO_VALUES_DESC; ?>"><?php echo _JSHOP_BAFO_VALUES; ?></th>
+        <th title="<?php echo _JSHOP_BAFO_REQUIRED_DESC; ?>"><?php echo _JSHOP_BAFO_REQUIRED; ?></th>
         <th title="<?php echo _JSHOP_BAFO_ORDER_DESC; ?>"><?php echo _JSHOP_BAFO_ORDER; ?></th>
         </thead>
         <tbody>
@@ -106,6 +121,10 @@ $script = "
                     </td>
 
                     <td>
+                        <?php echo \JHtml::_('select.genericlist', $field_type, 'dinamic_field[field_type][]', 'class = "inputbox form-control form-select"', 'value', 'text', (isset($field->field_type) ? $field->field_type : 0)); ?>
+                    </td>
+
+                    <td>
                         <input type="text"
                                name="dinamic_field[title][]"
                                value="<?php echo(isset($field->title) ? $field->title : ''); ?>"
@@ -115,8 +134,24 @@ $script = "
                                style="width: 210px;"
                         />
                     </td>
+
                     <td>
-                        <input type="number" min="0" step="1" name="dinamic_field[ordering][]"
+                        <textarea name="dinamic_field[values_list][]"
+                                  placeholder="<?php echo _JSHOP_BACF_VALUES; ?>"
+                                  title="<?php echo _JSHOP_BACF_VALUES_DESC; ?>"
+                                  class="inputbox form-control form-textarea"
+                        ><?php echo(isset($field->values_list) ? $field->values_list : ''); ?></textarea>
+                    </td>
+
+                    <td>
+                        <?php echo \JHtml::_('select.genericlist', $yes_no_options, 'dinamic_field[required][]', 'class="inputbox form-control form-select form-select-color-state" style="width: 120px;"', 'value', 'text', (isset($field->required) ? $field->required : 0)); ?>
+                    </td>
+
+                    <td>
+                        <input type="number"
+                               min="0"
+                               step="1"
+                               name="dinamic_field[ordering][]"
                                value="<?php echo(isset($field->ordering) ? $field->ordering : 0); ?>"
                                placeholder="<?php echo _JSHOP_BAFO_ORDER; ?>"
                                title="<?php echo _JSHOP_BAFO_ORDER_DESC; ?>"

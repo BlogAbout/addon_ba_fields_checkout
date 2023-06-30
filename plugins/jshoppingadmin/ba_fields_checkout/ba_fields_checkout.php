@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.0
+ * @version 0.1.1
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -68,11 +68,20 @@ class plgJshoppingAdminBa_fields_checkout extends JPlugin
             }
 
             foreach ($result_fields as $field) {
+                if ($field['field_type'] == '0') {
+                    continue;
+                }
+
                 $field_data = new stdClass();
+                $field_data->field_type = $field['field_type'];
                 $field_data->title = $field['title'];
+
                 if (isset($field['ordering'])) {
                     $field_data->ordering = $field['ordering'];
                 }
+
+                $field_data->values_list = $field['values_list'];
+                $field_data->required = isset($field['required']) ? $field['required'] : 0;
 
                 if ($field['field_id'] == 0) {
                     $db->insertObject('#__jshopping_fields_checkout_list', $field_data);

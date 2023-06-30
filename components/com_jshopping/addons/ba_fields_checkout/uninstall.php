@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.0
+ * @version 0.1.1
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
