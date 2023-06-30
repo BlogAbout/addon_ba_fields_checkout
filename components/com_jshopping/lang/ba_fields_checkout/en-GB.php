@@ -1,11 +1,11 @@
 <?php
 /**
-* @version 0.0.5
-* @author А.П.В.
-* @package ba_fields_checkout for Jshopping
-* @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
-* @license GNU/GPL
-**/
+ * @version 0.1.0
+ * @author А.П.В.
+ * @package ba_fields_checkout for Jshopping
+ * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
+ * @license GNU/GPL
+ **/
 defined('_JEXEC') or die('Restricted access');
 
 define('_JSHOP_BAFO_NAME', "Custom order fields");
@@ -21,4 +21,3 @@ define('_JSHOP_BAFO_TITLE', "Title field");
 define('_JSHOP_BAFO_TITLE_DESC', "Specify the title that will be displayed in the administrative panel and on order page.");
 define('_JSHOP_BAFO_ORDER', "Order");
 define('_JSHOP_BAFO_ORDER_DESC', "Specify the serial number to sort the field.");
-?>
