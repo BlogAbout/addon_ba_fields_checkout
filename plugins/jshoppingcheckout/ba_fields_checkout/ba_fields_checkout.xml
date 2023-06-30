@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" version="3.0.0" method="upgrade" group="jshoppingcheckout">
+	<name>JoomShopping addon - Fields Order</name>
+	<creationDate>30.04.2021</creationDate>
+	<author>Blog About</author>
+	<authorEmail>info@blog-about.ru</authorEmail>
+	<authorUrl>http://blog-about.ru</authorUrl>
+	<copyright></copyright>
+	<license>Open Source License, GNU/GPL</license>
+	<version>0.0.5</version>	
+	<description>ba_fields_order</description> 
+	<files>
+		<filename plugin="ba_fields_order">ba_fields_order.php</filename>
+	</files>
+</extension>        	   	      	        		          	
