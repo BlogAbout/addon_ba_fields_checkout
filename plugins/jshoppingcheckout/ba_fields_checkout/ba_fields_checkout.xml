@@ -7,7 +7,7 @@
     <authorUrl>http://blog-about.ru</authorUrl>
     <copyright></copyright>
     <license>Open Source License, GNU/GPL</license>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
     <description>ba_fields_order</description>
     <files>
         <filename plugin="ba_fields_order">ba_fields_order.php</filename>

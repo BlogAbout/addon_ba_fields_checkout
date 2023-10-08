@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.1
+ * @version 0.1.2
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -28,6 +28,32 @@ define('_JSHOP_BAFO_VALUES_DESC', "Specify list values. Specify each new value o
 define('_JSHOP_BAFO_REQUIRED', "Required");
 define('_JSHOP_BAFO_REQUIRED_DESC', "Specify, if need field as required.");
 
+define('_JSHOP_BAFO_FIELD_TYPE', "Field type");
+define('_JSHOP_BAFO_FIELD_TYPE_DESC', "Select the type of field to display.");
+define('_JSHOP_BAFO_FIELD_TYPE_INPUT', "Input");
+define('_JSHOP_BAFO_FIELD_TYPE_NUMBER', "Number");
+define('_JSHOP_BAFO_FIELD_TYPE_TEL', "Phone");
+define('_JSHOP_BAFO_FIELD_TYPE_EMAIL', "E-mail");
+define('_JSHOP_BAFO_FIELD_TYPE_LINK', "Link");
+define('_JSHOP_BAFO_FIELD_TYPE_AREA', "Textarea");
+define('_JSHOP_BAFO_FIELD_TYPE_EDITOR', "Text Editor");
+define('_JSHOP_BAFO_FIELD_TYPE_RADIO', "Radiobutton");
+define('_JSHOP_BAFO_FIELD_TYPE_CHECKBOX', "Checkbox");
+define('_JSHOP_BAFO_FIELD_TYPE_SELECT', "Select");
+define('_JSHOP_BAFO_FIELD_TYPE_COMBOBOX', "Combobox");
+define('_JSHOP_BAFO_FIELD_TYPE_IMAGE', "Image");
+define('_JSHOP_BAFO_FIELD_TYPE_GALLERY', "Gallery");
+define('_JSHOP_BAFO_FIELD_TYPE_YOUTUBE', "Video Youtube");
+define('_JSHOP_BAFO_FIELD_TYPE_CALENDAR', "Calendar");
+define('_JSHOP_BAFO_FIELD_TYPE_FILE', "File");
+
 define('_JSHOP_BAFO_NO_TYPE_FIELD', "Field type not specified.");
 define('_JSHOP_BAFO_NO_VALUES_FIELD', "No field values specified.");
 define('_JSHOP_BAFO_NEED_SELECT', "- Select -");
+
+define('_JSHOP_BAFO_BROWSE', "Browse");
+
+define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_NOT_SELECTED', "Upload file not selected.");
+define('_JSHOP_BAFO_ERROR_DISABLED_UPLOAD_FILE', "The installer can't continue until file uploads are enabled for the server.");
+define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_SERVER', "There was an error uploading this file to the server.");
+define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_MAX_SIZE', "The uploaded file exceeds the allowed size.");

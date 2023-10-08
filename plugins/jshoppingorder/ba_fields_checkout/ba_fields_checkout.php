@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.1
+ * @version 0.1.2
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -8,9 +8,10 @@
  **/
 defined('_JEXEC') or die('Restricted access');
 
-class plgJshoppingorderBa_fields_checkout extends JPlugin
+class plgJshoppingorderBa_fields_checkout extends \JPlugin
 {
     private $_params;
+    private $jshopConfig;
 
     function __construct($subject, $config)
     {
@@ -19,6 +20,9 @@ class plgJshoppingorderBa_fields_checkout extends JPlugin
         $addon = \JSFactory::getTable('addon', 'jshop');
         $addon->loadAlias('ba_fields_checkout');
         $this->_params = (object)$addon->getParams();
+
+        $jshopConfig = \JSFactory::getConfig();
+        $this->jshopConfig = $jshopConfig;
     }
 
     function onBeforeCreateTemplateOrderPartMail(&$view)
@@ -48,12 +52,12 @@ class plgJshoppingorderBa_fields_checkout extends JPlugin
 			WHERE `id_order` = " . $view->order->order_id . "
 		";
         $db->setQuery($query);
-        $fields_data = $db->loadObjectList();
+        $fieldsData = $db->loadObjectList();
 
-        if ($fields_data) {
-            $array_data = array();
-            foreach ($fields_data as $f) {
-                $array_data[$f->id_field] = $f->content;
+        if ($fieldsData) {
+            $arrayData = array();
+            foreach ($fieldsData as $f) {
+                $arrayData[$f->id_field] = $f->content;
             }
 
             $query = "
@@ -62,23 +66,24 @@ class plgJshoppingorderBa_fields_checkout extends JPlugin
 				ORDER BY `ordering`
 			";
             $db->setQuery($query);
-            $fields_labels = $db->loadObjectList();
+            $fieldsLabels = $db->loadObjectList();
 
             $content = '';
-            if ($fields_labels) {
-                $content .= '<tr>
-					<td style="vertical-align: top; padding-top: 10px;" width="50%">
-						<table cellspacing="0" cellpadding="0" style="line-height: 100%;">
-							<tr>
-								<td colspan="2"><b>Дополнительная информация</b></td>
-							</tr>
+            if ($fieldsLabels) {
+                $content .= '
+                    <tr>
+                        <td style="vertical-align: top; padding-top: 10px; width: 50%">
+                            <table style="line-height: 100%; border-spacing: 0; padding: 0; border-collapse: separate;">
+                                <tr>
+                                    <td colspan="2"><b>Дополнительная информация</b></td>
+                                </tr>
 				';
 
-                foreach ($fields_labels as $field) {
+                foreach ($fieldsLabels as $field) {
                     $content .= '
 						<tr>
-							<td width="100">' . $field->title . ':</td>
-							<td>' . $array_data[$field->id] . '</td>
+							<td style="width: 100%">' . $field->title . ':</td>
+							<td>' . $this->renderFieldByType($field, $arrayData[$field->id]) . '</td>
 						</tr>
 					';
                 }
@@ -90,6 +95,25 @@ class plgJshoppingorderBa_fields_checkout extends JPlugin
             }
 
             $view->_tmp_ext_html_ordermail_after_customer_info .= $content;
+        }
+    }
+
+    function renderFieldByType($field, $value) {
+        if (!$value) {
+            return '';
+        }
+
+        switch($field->field_type) {
+            case 'input':
+            case 'area':
+            case 'radio':
+            case 'checkbox':
+            case 'select':
+                return $value;
+            case 'file':
+                return '<a href="' . $this->jshopConfig->live_path . 'files/client_upload/' . $value . '" target="_blank" rel="nofollow noopener noreferrer">' . $value . '</a>';
+            default:
+                return '';
         }
     }
 }

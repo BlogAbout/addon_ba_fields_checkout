@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.1
+ * @version 0.1.2
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -33,6 +33,7 @@ $db->execute();
 
 \JFolder::delete(JPATH_ROOT . '/components/com_jshopping/addons/ba_fields_checkout/');
 \JFolder::delete(JPATH_ROOT . '/components/com_jshopping/lang/ba_fields_checkout/');
+\JFolder::delete(JPATH_ROOT . '/components/com_jshopping/controllers/BaFieldsCheckout.php');
 \JFolder::delete(JPATH_ROOT . '/plugins/jshoppingadmin/ba_fields_checkout/');
 \JFolder::delete(JPATH_ROOT . '/plugins/jshoppingcheckout/ba_fields_checkout/');
 \JFolder::delete(JPATH_ROOT . '/plugins/jshoppingorder/ba_fields_checkout/');

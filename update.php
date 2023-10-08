@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.1
+ * @version 0.1.2
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -12,7 +12,7 @@ $name = 'JoomShopping addon - Fields Checkout';
 $type = 'plugin';
 $element = 'ba_fields_checkout';
 $folders = array('jshoppingadmin', 'jshoppingcheckout', 'jshoppingorder');
-$version = '0.1.1';
+$version = '0.1.2';
 $cache = '{"creationDate":"30.04.2021","author":"Blog About","authorEmail":"info@blog-about.ru","authorUrl":"https://blog-about.ru","version":"' . $version . '"}';
 $params = '{}';
 
