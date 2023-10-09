@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.2
+ * @version 0.1.3
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -53,7 +53,9 @@ define('_JSHOP_BAFO_NEED_SELECT', "- Select -");
 
 define('_JSHOP_BAFO_BROWSE', "Browse");
 
+define('_JSHOP_BAFO_ERROR_FIELD_NOT_FOUND', "The file upload field was not found in the addon settings.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_NOT_SELECTED', "Upload file not selected.");
 define('_JSHOP_BAFO_ERROR_DISABLED_UPLOAD_FILE', "The installer can't continue until file uploads are enabled for the server.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_SERVER', "There was an error uploading this file to the server.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_MAX_SIZE', "The uploaded file exceeds the allowed size.");
+define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_MIME_TYPE', "The uploaded file has an invalid type");

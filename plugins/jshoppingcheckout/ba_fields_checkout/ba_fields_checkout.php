@@ -19,6 +19,8 @@ class plgJshoppingcheckoutBa_fields_checkout extends JPlugin
         $addon = \JSFactory::getTable('addon', 'jshop');
         $addon->loadAlias('ba_fields_checkout');
         $this->_params = (object)$addon->getParams();
+
+        \JSFactory::loadExtLanguageFile('ba_fields_checkout');
     }
 
     function onBeforeDisplayCheckoutStep5View(&$view)
@@ -114,6 +116,7 @@ jQuery(function($) {
             $('input#ba_order_field_' + fieldId).val('')
             $(this).css('display', 'none')
             $(this).siblings('.input-button-upload').children('.button-file-name').css('display', 'none').text('')
+            $(this).siblings('input[type="file"]').val('')
         })
         .on('click', '.ba-fc-input-file .input-button-upload', function() {
             $(this).siblings('input[type="file"]').trigger('click')
@@ -126,10 +129,13 @@ jQuery(function($) {
             }
             
             const button = $(this).siblings('.input-button-upload')
+            const fieldId = $(button).parent().data('id')
             const data = new FormData()
             $.each(files, function(key, value) {
                 data.append('file', value);
             })
+            
+            data.append('fieldId', fieldId)
             
             $.ajax({
                 type: 'POST',
@@ -141,7 +147,6 @@ jQuery(function($) {
                 contentType: false,
                 success: function(data, statusText, xhr) {
                     if (data.hasOwnProperty('success')) {
-                        const fieldId = $(button).parent().data('id')
                         $(button).siblings('.input-button-delete').css('display', 'flex')
                         $(button).children('.button-file-name').css('display', 'block').text('(' + data.success + ')')
                         $('input#ba_order_field_' + fieldId).val(data.success)
@@ -285,11 +290,25 @@ EOF;
             }
             case 'file':
             {
+                $accept = null;
+                if ($field->values_list) {
+                    $fieldParams = explode("\n", $field->values_list);
+                    if (isset($fieldParams) && count($fieldParams)) {
+                        foreach ($fieldParams as $param) {
+                            $paramItem = explode('=', $param);
+
+                            if ($paramItem[0] === 'accept') {
+                                $accept = $paramItem[1];
+                            }
+                        }
+                    }
+                }
+
                 $fieldHtml = '
                     <div class="ba-fc-input-file" data-id="' . $field->id . '">
-                        <input type="file" style="display: none;" name="' . $fieldName . '" value="" />
+                        <input type="file" style="display: none;" name="' . $fieldName . '" value="" ' . ($accept ? 'accept=' . $accept : '') . ' />
                         <div class="input-button-upload">
-                            <span>Обзор</span>
+                            <span>' . _JSHOP_BAFO_BROWSE . '</span>
                             <span class="button-file-name" style="display: none;"></span>
                         </div>
                         <div class="input-button-delete" style="display: none;"><span>X</span></div>

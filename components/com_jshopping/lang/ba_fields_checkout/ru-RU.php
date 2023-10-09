@@ -1,6 +1,6 @@
 <?php
 /**
- * @version 0.1.2
+ * @version 0.1.3
  * @author А.П.В.
  * @package ba_fields_checkout for Jshopping
  * @copyright Copyright (C) 2010 blog-about.ru. All rights reserved.
@@ -53,7 +53,9 @@ define('_JSHOP_BAFO_NEED_SELECT', "- Выберите -");
 
 define('_JSHOP_BAFO_BROWSE', "Обзор");
 
+define('_JSHOP_BAFO_ERROR_FIELD_NOT_FOUND', "Не найдено поле загрузки файла в настройках аддона.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_NOT_SELECTED', "Не выбран файл для загрузки.");
 define('_JSHOP_BAFO_ERROR_DISABLED_UPLOAD_FILE', "На сервере отключена возможность загрузки файлов.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_SERVER', "Произошла ошибка при загрузке файла на сервер.");
 define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_MAX_SIZE', "Загружаемый файл превышает допустимый размер.");
+define('_JSHOP_BAFO_ERROR_UPLOAD_FILE_MIME_TYPE', "Загружаемый файл имеет недопустимый тип.");
